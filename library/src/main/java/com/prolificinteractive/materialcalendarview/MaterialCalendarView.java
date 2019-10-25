@@ -1434,9 +1434,12 @@ public class MaterialCalendarView extends ViewGroup {
       break;
       default:
       case SELECTION_MODE_SINGLE: {
+        boolean deselected = adapter.getSelectedDates().contains(date);
         adapter.clearSelections();
-        adapter.setDateSelected(date, true);
-        dispatchOnDateSelected(date, true);
+        if(!deselected) {
+          adapter.setDateSelected(date, true);
+        }
+        dispatchOnDateSelected(date, !deselected);
       }
       break;
     }
